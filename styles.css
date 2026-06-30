@@ -279,6 +279,22 @@ p {
   width: 100%;
 }
 
+/* Header sits over the dark hero photo before scrolling — keep text readable */
+.site-header:not(.scrolled) .nav-logo,
+.site-header:not(.scrolled) .nav-links a {
+  color: var(--color-ivory);
+}
+
+.site-header:not(.scrolled) .nav-logo:hover,
+.site-header:not(.scrolled) .nav-links a:hover,
+.site-header:not(.scrolled) .nav-links a:focus {
+  color: var(--color-gold-light);
+}
+
+.site-header:not(.scrolled) .hamburger-line {
+  background-color: var(--color-ivory);
+}
+
 /* Hamburger — hidden on desktop */
 .nav-toggle {
   display: none;
@@ -312,6 +328,28 @@ p {
   background-color: var(--color-charcoal);
   overflow: hidden;
   text-align: center;
+}
+
+/* Background image layer — sits behind the noise/gradient overlays.
+   Falls back to the existing charcoal background if no image is present. */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* Dark gradient so hero text stays readable over any photo */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    rgba(26, 26, 24, 0.45),
+    rgba(26, 26, 24, 0.75)
+  );
 }
 
 /* Signature element: a subtle animated grain texture overlay */
@@ -397,6 +435,209 @@ p {
 }
 
 /* ============================================================
+   PORTFOLIO SECTION
+   ============================================================ */
+.portfolio-section {
+  background-color: var(--color-ivory);
+}
+
+.portfolio-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.portfolio-filter {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--color-ivory-dark);
+  color: var(--color-text-muted);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-base), color var(--transition-base), background-color var(--transition-base);
+}
+
+.portfolio-filter:hover,
+.portfolio-filter:focus {
+  border-color: var(--color-gold);
+  color: var(--color-charcoal);
+  outline: none;
+}
+
+.portfolio-filter.active {
+  background-color: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+  color: var(--color-ivory);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  aspect-ratio: 4 / 5;
+  cursor: pointer;
+  background-color: var(--color-ivory-dark);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.06);
+}
+
+/* Calm hover overlay — a thin gold-tinted veil, not a flashy effect */
+.portfolio-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 26, 24, 0.55) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.portfolio-item:hover::after {
+  opacity: 1;
+}
+
+.portfolio-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-sm);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  z-index: 1;
+}
+
+.portfolio-item:hover .portfolio-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portfolio-category {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ivory);
+}
+
+/* Hidden state for filtered-out items, toggled by JS */
+.portfolio-item.is-hidden {
+  display: none;
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(26, 26, 24, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-image {
+  max-width: min(90vw, 1000px);
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--color-gold-light);
+  color: var(--color-ivory);
+  font-size: 1.5rem;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+  background-color: var(--color-gold);
+  color: var(--color-charcoal);
+  outline: none;
+}
+
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   ============================================================ */
+.whatsapp-float {
+  position: fixed;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(184, 154, 104, 0.4);
+  z-index: 90;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus {
+  background-color: var(--color-charcoal);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.whatsapp-icon {
+  width: 26px;
+  height: 26px;
+  fill: var(--color-white);
+}
+
+/* ============================================================
    SERVICES SECTION
    ============================================================ */
 .services-section {
@@ -414,6 +655,9 @@ p {
 .service-card {
   background-color: var(--color-ivory);
   padding: var(--space-lg) var(--space-md);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
   transition: background-color var(--transition-base);
   position: relative;
   overflow: hidden;
@@ -438,13 +682,34 @@ p {
   background-color: var(--color-white);
 }
 
+/* Icon container — ready for an SVG or <img> to be dropped in later.
+   Currently renders a minimal gold dot per category as a placeholder mark. */
 .service-icon {
-  font-size: 0.6rem;
-  color: var(--color-gold);
+  width: 36px;
+  height: 36px;
   margin-bottom: var(--space-md);
-  display: block;
-  letter-spacing: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.service-icon::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
   opacity: 0.7;
+}
+
+.service-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-gold);
+  opacity: 0.25;
+  border-radius: 50%;
 }
 
 .service-name {
@@ -628,11 +893,23 @@ p {
   min-height: 120px;
 }
 
+.form-input.is-invalid {
+  border-color: #c0392b;
+}
+
 .form-note {
   font-size: 0.82rem;
   color: var(--color-gold);
   min-height: 1.2em;
   text-align: center;
+}
+
+.form-note.is-success {
+  color: var(--color-gold);
+}
+
+.form-note.is-error {
+  color: #c0392b;
 }
 
 /* ============================================================
@@ -752,6 +1029,10 @@ p {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .contact-wrapper {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
@@ -819,6 +1100,34 @@ p {
   /* Services */
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Portfolio */
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .portfolio-filters {
+    gap: 0.5rem;
+  }
+
+  .portfolio-filter {
+    padding: 0.5rem 1rem;
+    font-size: 0.65rem;
+  }
+
+  /* WhatsApp button */
+  .whatsapp-float {
+    width: 48px;
+    height: 48px;
+    bottom: var(--space-sm);
+    right: var(--space-sm);
+  }
+
+  .whatsapp-icon {
+    width: 22px;
+    height: 22px;
   }
 
   /* Associated */
