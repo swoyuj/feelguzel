@@ -214,65 +214,56 @@
       clearStatus();
     });
   });
+})();
 
-  // WhatsApp number used for form submissions — keep in sync with footer/contact links
-  const WHATSAPP_NUMBER = '9779849566814';
+//Form submit on Web3Forms gets email in swoyujbajracharya@gmail.com
+const form = document.getElementById("contact-form");
+const status = document.getElementById("form-status");
 
-  function buildWhatsAppMessage(form) {
-    const name = form.elements['name'].value.trim();
-    const phone = form.elements['phone'].value.trim();
-    const eventSelect = form.elements['event'];
-    const service = eventSelect.options[eventSelect.selectedIndex]
-      ? eventSelect.options[eventSelect.selectedIndex].text
-      : '';
-    const message = form.elements['message'].value.trim();
+form.addEventListener("submit", async function(e) {
 
-    let text = 'Hello Feel Guzel,\n';
-    text += 'Name: ' + name + '\n';
-    text += 'Phone: ' + phone + '\n';
-    text += 'Service: ' + service + '\n';
-    if (message) {
-      text += 'Message: ' + message;
+  e.preventDefault(); // stops URL change
+
+  status.innerHTML = "Sending...";
+
+
+  const formData = new FormData(form);
+
+
+  try {
+
+    const response = await fetch(
+      "https://api.web3forms.com/submit",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+
+    const result = await response.json();
+
+
+    if(result.success) {
+
+      status.innerHTML = "✓ Message has been sent successfully.";
+
+      form.reset();
+
+    } else {
+
+      status.innerHTML = "Something went wrong. Please try again.";
+
     }
 
-    return text;
+
+  } catch(error) {
+
+    status.innerHTML = "Unable to send message. Please try again.";
+
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    clearStatus();
-
-    // Validate all fields
-    const fields = form.querySelectorAll('.form-input');
-    let firstError = null;
-
-    fields.forEach(function (field) {
-      const error = validateField(field);
-      if (error && !firstError) {
-        firstError = { field: field, message: error };
-        field.classList.add('is-invalid');
-        field.setAttribute('aria-invalid', 'true');
-      }
-    });
-
-    if (firstError) {
-      setStatus(firstError.message, true);
-      firstError.field.focus();
-      return;
-    }
-
-    // Build and open a pre-filled WhatsApp chat with the form details.
-    // GitHub Pages has no backend, so this is the most reliable delivery
-    // path for a photography studio whose clients already use WhatsApp.
-    const text = buildWhatsAppMessage(form);
-    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
-
-    window.open(url, '_blank', 'noopener,noreferrer');
-
-    setStatus('Opening WhatsApp. Send the message to complete your inquiry.', false);
-    form.reset();
-  });
-})();
+});
 
 /* ============================================================
    7. PORTFOLIO FILTER

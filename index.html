@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
   <!-- ========== NAVIGATION ========== -->
   <header class="site-header">
     <nav class="nav-container">
@@ -19,19 +18,17 @@
         <span class="hamburger-line"></span>
       </button>
       <ul class="nav-links">
-        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#portfolio">The Gallery</a></li>
         <li><a href="#services">Services</a></li>
-        <li><a href="#associated">Also Offer</a></li>
+        <li><a href="#associated">Collaborations</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
-
   <main>
-
     <!-- ========== HERO ========== -->
     <section id="home" class="hero-section">
-      <div class="hero-bg" style="background-image: url('images/hero.jpg');"></div>
+      <div class="hero-bg" style="background-image: url('images/logo-feel-guzel.jpg');"></div>
       <div class="hero-content">
         <h1 class="hero-brand">Feel Guzel</h1>
         <p class="hero-tagline">Every moment deserves to be felt forever.</p>
@@ -39,16 +36,14 @@
       </div>
       <div class="hero-overlay"></div>
     </section>
-
     <!-- ========== PORTFOLIO ========== -->
     <section id="portfolio" class="portfolio-section">
       <div class="section-container">
         <div class="section-header">
           <span class="section-label">Our Work</span>
-          <h2 class="section-title">Portfolio</h2>
+          <h2 class="section-title">The Gallery</h2>
           <p class="section-subtitle">A glimpse into the moments we have had the honor of capturing.</p>
         </div>
-
         <div class="portfolio-filters" role="tablist" aria-label="Portfolio categories">
           <button class="portfolio-filter active" data-filter="all" role="tab" aria-selected="true">All</button>
           <button class="portfolio-filter" data-filter="wedding" role="tab" aria-selected="false">Wedding</button>
@@ -56,132 +51,181 @@
           <button class="portfolio-filter" data-filter="baby" role="tab" aria-selected="false">Baby</button>
           <button class="portfolio-filter" data-filter="events" role="tab" aria-selected="false">Events</button>
         </div>
-
         <div class="portfolio-grid">
-
           <figure class="portfolio-item" data-category="wedding">
             <img src="images/wedding/01.jpg" alt="Wedding photography by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Wedding</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="couple">
             <img src="images/couple/01.jpg" alt="Couple photoshoot by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Couple</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="baby">
             <img src="images/baby/01.jpg" alt="Baby photoshoot by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Baby</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="events">
             <img src="images/events/01.jpg" alt="Event photography by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Events</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="wedding">
             <img src="images/wedding/02.jpg" alt="Wedding photography by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Wedding</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="couple">
             <img src="images/couple/02.jpg" alt="Couple photoshoot by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Couple</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="baby">
             <img src="images/baby/02.jpg" alt="Baby photoshoot by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Baby</span>
             </figcaption>
           </figure>
-
           <figure class="portfolio-item" data-category="events">
             <img src="images/events/02.jpg" alt="Event photography by Feel Guzel" loading="lazy" />
             <figcaption class="portfolio-caption">
               <span class="portfolio-category">Events</span>
             </figcaption>
           </figure>
-
         </div>
       </div>
     </section>
-
     <!-- ========== LIGHTBOX ========== -->
     <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close image preview">&times;</button>
       <img class="lightbox-image" id="lightboxImage" src="" alt="" />
     </div>
-
     <!-- ========== SERVICES ========== -->
-    <section id="services" class="services-section">
-      <div class="section-container">
-        <div class="section-header">
-          <span class="section-label">What We Do</span>
-          <h2 class="section-title">Our Services</h2>
-          <p class="section-subtitle">We document love, milestones, and memories with care and intention.</p>
-        </div>
-
-        <div class="services-grid">
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="wedding" aria-hidden="true"></div>
-            <h3 class="service-name">Wedding Photography</h3>
-            <p class="service-description">Full-day coverage of your wedding — from preparation to reception — crafted with a cinematic, timeless approach.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="corporate" aria-hidden="true"></div>
-            <h3 class="service-name">Corporate Photoshoots</h3>
-            <p class="service-description">Professional imagery for teams, executives, and brand identities. Clean, polished, and on-brand.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="school" aria-hidden="true"></div>
-            <h3 class="service-name">School Events</h3>
-            <p class="service-description">Graduation days, annual functions, and school milestones — captured with energy and attention to detail.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="bratabandha" aria-hidden="true"></div>
-            <h3 class="service-name">Bratabandha Ceremonies</h3>
-            <p class="service-description">A sacred coming-of-age ritual deserves photography that honors its meaning. We document every ritual with respect.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="baby" aria-hidden="true"></div>
-            <h3 class="service-name">Baby Photoshoots</h3>
-            <p class="service-description">Newborn sessions, first birthdays, and early milestones — soft, warm, and gentle in every frame.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="mehendi" aria-hidden="true"></div>
-            <h3 class="service-name">Mehendi Photoshoots</h3>
-            <p class="service-description">The artistry of mehendi deserves its own spotlight. We capture the detail, the joy, and the celebration.</p>
-          </article>
-
-          <article class="service-card">
-            <div class="service-icon" data-icon="couple" aria-hidden="true"></div>
-            <h3 class="service-name">Couple Photoshoots</h3>
-            <p class="service-description">Pre-wedding, anniversary, or just because — intimate sessions that show who you are together.</p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
+	 <section class="services-section" id="services">
+	  <div class="section-container">
+		<div class="section-header">
+		  <span class="section-label">What We Do</span>
+		  <h2 class="section-title">Our Services</h2>
+		  <p class="section-subtitle">
+			Capturing milestones, celebrations, and stories that deserve to be remembered.
+		  </p>
+		</div>
+		<div class="services-grid">
+		  <article class="service-card">
+			<img src="images/wedding/01.jpg" alt="Wedding Photography">
+			<div class="service-content">
+			  <div class="service-icon">💍</div>
+			  <h3>Wedding Photography</h3>
+			  <span class="service-tag">
+				Bride Side • Groom Side
+			  </span>
+			  <p>
+				From heartfelt rituals to joyful celebrations, we capture every emotion and timeless moment.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/pre-wedding/01.jpg" alt="Pre Wedding Photography">
+			<div class="service-content">
+			  <div class="service-icon">❤️</div>
+			  <h3>Pre Wedding Photography</h3>
+			  <span class="service-tag">
+				Couple Shoot • Creative Concepts
+			  </span>
+			  <p>
+				Romantic stories captured through natural moments, beautiful locations, and meaningful connections.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/events/01.jpg" alt="Event Photography">
+			<div class="service-content">
+			  <div class="service-icon">🎉</div>
+			  <h3>Event Photography</h3>
+			  <span class="service-tag">
+				Birthdays • Parties • Corporate
+			  </span>
+			  <p>
+				Preserving the energy, emotions, and highlights of every special occasion.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/portrait/01.jpg" alt="Portrait Photography">
+			<div class="service-content">
+			  <div class="service-icon">📸</div>
+			  <h3>Portrait Photography</h3>
+			  <span class="service-tag">
+				Individual • Family • Lifestyle
+			  </span>
+			  <p>
+				Creating portraits that reflect personality, confidence, and authentic expressions.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/cinematic/01.jpg" alt="Cinematic Videography">
+			<div class="service-content">
+			  <div class="service-icon">🎥</div>
+			  <h3>Cinematic Videography</h3>
+			  <span class="service-tag">
+				Wedding Films • Highlights
+			  </span>
+			  <p>
+				Turning your memories into cinematic stories you can experience again and again.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/baby/01.jpg" alt="Baby Photography">
+			<div class="service-content">
+			  <div class="service-icon">👶</div>
+			  <h3>Baby Photography</h3>
+			  <span class="service-tag">
+				Newborn • Milestones
+			  </span>
+			  <p>
+				Capturing the tiny smiles, precious moments, and beautiful memories of growing years.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/fashion/01.jpg" alt="Fashion Photography">
+			<div class="service-content">
+			  <div class="service-icon">✨</div>
+			  <h3>Fashion Photography</h3>
+			  <span class="service-tag">
+				Portfolio • Branding
+			  </span>
+			  <p>
+				Professional photography that highlights style, creativity, and personal identity.
+			  </p>
+			</div>
+		  </article>
+		  <article class="service-card">
+			<img src="images/commercial/01.jpg" alt="Commercial Photography">
+			<div class="service-content">
+			  <div class="service-icon">🏢</div>
+			  <h3>Commercial Photography</h3>
+			  <span class="service-tag">
+				Products • Business
+			  </span>
+			  <p>
+				High-quality visuals designed to showcase your brand and connect with your audience.
+			  </p>
+			</div>
+		  </article>
+		</div>
+	  </div>
+	</section>
     <!-- ========== ASSOCIATED SERVICES ========== -->
     <section id="associated" class="associated-section">
       <div class="section-container">
@@ -190,23 +234,41 @@
           <h2 class="section-title">We Also Offer</h2>
           <p class="section-subtitle">Complete event readiness under one roof.</p>
         </div>
-
         <div class="associated-grid">
-
-          <article class="associated-card">
-            <h3 class="associated-name">Mehendi &amp; Makeup</h3>
-            <p class="associated-description">Professional mehendi artists and makeup stylists to make you feel your best before the camera is ever raised.</p>
-          </article>
-
-          <article class="associated-card">
-            <h3 class="associated-name">Groom Styling</h3>
-            <p class="associated-description">Grooming and styling tailored for the groom — because the day belongs to both of you.</p>
-          </article>
-
-        </div>
+    <article class="associated-brand">
+      <div class="associated-logo">
+        <img src="images/logo-guzel-mehndi-makeup.png" alt="Guzel Mehendi">
+      </div>
+      <div class="associated-content">
+        <h3>
+          MEHENDI & MAKEUP
+          <span>BY GUZEL</span>
+        </h3>
+        <p>
+          Bringing out your natural beauty for your special moments.
+        </p>
+      </div>
+    </article>
+    <div class="associated-divider">
+      <span>♥</span>
+    </div>
+    <article class="associated-brand">
+      <div class="associated-logo dark-logo">
+        <img src="images/logo-makes-and-make.png" alt="Makes and Made">
+      </div>
+      <div class="associated-content">
+        <h3>
+          MAKES & MADE
+          <span>BY GUZEL</span>
+        </h3>
+        <p>
+          Premium groom suits and customized looks for your perfect day.
+        </p>
+      </div>
+    </article>
+  </div>
       </div>
     </section>
-
     <!-- ========== CONTACT ========== -->
     <section id="contact" class="contact-section">
       <div class="section-container">
@@ -215,29 +277,29 @@
           <h2 class="section-title">Let's Talk</h2>
           <p class="section-subtitle">Tell us about your event. We will get back to you promptly.</p>
         </div>
-
         <div class="contact-wrapper">
-
           <div class="contact-info">
             <div class="contact-person">
-              <p class="contact-label">Contact Person</p>
+              <p class="contact-label">Managing Director</p>
               <p class="contact-name">Ranjeela Rajthala</p>
             </div>
             <div class="contact-phone">
               <p class="contact-label">Phone &amp; WhatsApp</p>
-              <a href="tel:+9779849566814" class="contact-link">+977 984 956 6814</a>
+              <a href="https://wa.me/9779851358562" target="_blank" class="contact-link">+977 9851 358 562</a><br/>
+              <a href="https://wa.me/9779849566814" target="_blank" class="contact-link">+977 984 956 6814</a>
             </div>
             <div class="contact-social">
               <p class="contact-label">Instagram</p>
-              <a href="https://instagram.com/feelguzel" target="_blank" rel="noopener noreferrer" class="contact-link">@feelguzel</a>
+              <a href="https://instagram.com/feel_guzel" target="_blank" rel="noopener noreferrer" class="contact-link">@feel_guzel</a>
             </div>
             <div class="contact-whatsapp">
-              <a href="https://wa.me/9779849566814" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Message on WhatsApp</a>
+              <a href="https://wa.me/9779851358562" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Message on WhatsApp</a>
             </div>
           </div>
-
-          <form class="contact-form" novalidate>
+		  <form class="contact-form" id="contact-form">
             <div class="form-group">
+			  <input type="hidden" name="access_key" value="27b1bf09-0f19-4155-a2f4-694af4c6c0be">
+			  <input type="hidden" name="subject" value="Feel Guzel Inquiry">
               <label for="name" class="form-label">Your Name</label>
               <input type="text" id="name" name="name" class="form-input" placeholder="Full name" required />
             </div>
@@ -267,36 +329,36 @@
             <button type="submit" class="btn btn-primary btn-full">Send Message</button>
             <p class="form-note" id="form-status" aria-live="polite"></p>
           </form>
-
         </div>
       </div>
     </section>
-
   </main>
-
   <!-- ========== WHATSAPP FLOATING BUTTON ========== -->
   <a href="https://wa.me/9779849566814" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Message Feel Guzel on WhatsApp">
     <svg viewBox="0 0 24 24" class="whatsapp-icon" aria-hidden="true">
       <path d="M17.6 6.32A8.86 8.86 0 0 0 12.05 4a8.94 8.94 0 0 0-7.74 13.4L3 21l3.7-1.28A8.92 8.92 0 0 0 12.05 21h.01a8.94 8.94 0 0 0 8.94-8.95 8.88 8.88 0 0 0-3.4-5.73Zm-5.55 13.4a7.42 7.42 0 0 1-3.78-1.04l-.27-.16-2.8.97.94-2.73-.18-.28a7.44 7.44 0 1 1 6.09 3.24Zm4.08-5.57c-.22-.11-1.31-.65-1.51-.72-.2-.07-.35-.11-.5.11-.15.22-.57.72-.7.87-.13.15-.26.16-.48.05a6.1 6.1 0 0 1-1.79-1.1 6.71 6.71 0 0 1-1.24-1.54c-.13-.22-.01-.34.1-.45.1-.1.22-.26.33-.39.11-.13.15-.22.22-.37.07-.15.04-.28-.02-.39-.06-.11-.5-1.2-.68-1.65-.18-.43-.36-.37-.5-.38h-.43a.82.82 0 0 0-.6.28 2.5 2.5 0 0 0-.78 1.86c0 1.1.8 2.16.91 2.31.11.15 1.57 2.4 3.8 3.36a12.8 12.8 0 0 0 1.27.47 3.06 3.06 0 0 0 1.4.09c.43-.06 1.31-.53 1.49-1.05.18-.51.18-.95.13-1.04-.05-.1-.2-.16-.42-.27Z"/>
     </svg>
   </a>
-
   <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <p class="footer-logo">Feel Guzel</p>
-        <p class="footer-tagline">Photography &amp; Videography</p>
-      </div>
-      <div class="footer-links">
-        <a href="https://instagram.com/feelguzel" target="_blank" rel="noopener noreferrer" class="footer-link">Instagram @feelguzel</a>
-        <a href="https://wa.me/9779849566814" target="_blank" rel="noopener noreferrer" class="footer-link">WhatsApp +977 984 956 6814</a>
-      </div>
-      <p class="footer-copy">&copy; <span id="footer-year"></span> Feel Guzel. All rights reserved.</p>
-    </div>
-  </footer>
-
+	  <div class="footer-container">
+		<div class="footer-brand">
+		  <div class="footer-logo-image">
+			<img src="images/logo-feel-guzel.jpg" alt="Feel Guzel Logo">
+		  </div>
+		  <p class="footer-logo">Feel Guzel</p>
+		  <p class="footer-tagline">
+			Photography &amp; Videography
+		  </p>
+		  <p class="footer-copy">
+			&copy; <span id="footer-year"></span> Feel Guzel Pvt. Ltd. All rights reserved.
+		  </p>
+		</div>
+	  </div>
+	  <a href="#top" class="back-to-top">
+	  ↑ Back to Top
+	  </a>
+	</footer>
   <script src="script.js"></script>
-
 </body>
 </html>
