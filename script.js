@@ -84,6 +84,7 @@
   const selectors = [
     '.service-card',
     '.associated-card',
+    '.portfolio-item',
     '.contact-info',
     '.contact-form',
     '.section-header',
@@ -96,7 +97,9 @@
     el.classList.add('reveal');
 
     // Stagger cards within the same grid
-    const isCard = el.classList.contains('service-card') || el.classList.contains('associated-card');
+    const isCard = el.classList.contains('service-card')
+      || el.classList.contains('associated-card')
+      || el.classList.contains('portfolio-item');
     if (isCard) {
       // Get index within its parent to stagger siblings
       const siblings = Array.from(el.parentElement.children);
@@ -153,9 +156,9 @@
 })();
 
 /* ============================================================
-   6. CONTACT FORM — client-side validation + submission
-   No backend. Sends via Formspree if action attribute is set,
-   otherwise shows a success message for static/demo use.
+   6. CONTACT FORM — client-side validation + WhatsApp submission
+   No backend exists on GitHub Pages, so the form composes a
+   WhatsApp message and opens a chat with the studio directly.
    ============================================================ */
 (function initContactForm() {
   const form = document.querySelector('.contact-form');
@@ -164,11 +167,13 @@
 
   function setStatus(message, isError) {
     status.textContent = message;
-    status.style.color = isError ? '#c0392b' : 'var(--color-gold)';
+    status.classList.remove('is-success', 'is-error');
+    status.classList.add(isError ? 'is-error' : 'is-success');
   }
 
   function clearStatus() {
     status.textContent = '';
+    status.classList.remove('is-success', 'is-error');
   }
 
   function validateField(field) {
@@ -195,20 +200,43 @@
     field.addEventListener('blur', function () {
       const error = validateField(field);
       if (error) {
-        field.style.borderColor = '#c0392b';
+        field.classList.add('is-invalid');
         field.setAttribute('aria-invalid', 'true');
       } else {
-        field.style.borderColor = '';
+        field.classList.remove('is-invalid');
         field.removeAttribute('aria-invalid');
       }
     });
 
     field.addEventListener('input', function () {
-      field.style.borderColor = '';
+      field.classList.remove('is-invalid');
       field.removeAttribute('aria-invalid');
       clearStatus();
     });
   });
+
+  // WhatsApp number used for form submissions — keep in sync with footer/contact links
+  const WHATSAPP_NUMBER = '9779849566814';
+
+  function buildWhatsAppMessage(form) {
+    const name = form.elements['name'].value.trim();
+    const phone = form.elements['phone'].value.trim();
+    const eventSelect = form.elements['event'];
+    const service = eventSelect.options[eventSelect.selectedIndex]
+      ? eventSelect.options[eventSelect.selectedIndex].text
+      : '';
+    const message = form.elements['message'].value.trim();
+
+    let text = 'Hello Feel Guzel,\n';
+    text += 'Name: ' + name + '\n';
+    text += 'Phone: ' + phone + '\n';
+    text += 'Service: ' + service + '\n';
+    if (message) {
+      text += 'Message: ' + message;
+    }
+
+    return text;
+  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -222,7 +250,7 @@
       const error = validateField(field);
       if (error && !firstError) {
         firstError = { field: field, message: error };
-        field.style.borderColor = '#c0392b';
+        field.classList.add('is-invalid');
         field.setAttribute('aria-invalid', 'true');
       }
     });
@@ -233,44 +261,98 @@
       return;
     }
 
-    // If a Formspree action is present on the form, submit via fetch
-    const action = form.getAttribute('action');
-    if (action && action.includes('formspree')) {
-      const submitBtn = form.querySelector('[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+    // Build and open a pre-filled WhatsApp chat with the form details.
+    // GitHub Pages has no backend, so this is the most reliable delivery
+    // path for a photography studio whose clients already use WhatsApp.
+    const text = buildWhatsAppMessage(form);
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text);
 
-      fetch(action, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form),
-      })
-        .then(function (response) {
-          if (response.ok) {
-            setStatus('Message sent. We will be in touch soon.', false);
-            form.reset();
-          } else {
-            return response.json().then(function (data) {
-              const msg = data.errors
-                ? data.errors.map(function (err) { return err.message; }).join(', ')
-                : 'Something went wrong. Please try WhatsApp instead.';
-              setStatus(msg, true);
-            });
-          }
-        })
-        .catch(function () {
-          setStatus('Could not send. Please contact us via WhatsApp.', true);
-        })
-        .finally(function () {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-        });
+    window.open(url, '_blank', 'noopener,noreferrer');
 
-    } else {
-      // Static / demo fallback — no backend configured
-      setStatus('Thank you. We will reach out to you shortly.', false);
-      form.reset();
+    setStatus('Opening WhatsApp. Send the message to complete your inquiry.', false);
+    form.reset();
+  });
+})();
+
+/* ============================================================
+   7. PORTFOLIO FILTER
+   Toggles visibility of portfolio items by category using
+   the .is-hidden class. No layout library involved.
+   ============================================================ */
+(function initPortfolioFilter() {
+  const filterButtons = document.querySelectorAll('.portfolio-filter');
+  const items = document.querySelectorAll('.portfolio-item');
+  if (!filterButtons.length || !items.length) return;
+
+  filterButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      const filter = button.getAttribute('data-filter');
+
+      filterButtons.forEach(function (btn) {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+
+      items.forEach(function (item) {
+        const category = item.getAttribute('data-category');
+        const matches = filter === 'all' || category === filter;
+        item.classList.toggle('is-hidden', !matches);
+      });
+    });
+  });
+})();
+
+/* ============================================================
+   8. LIGHTBOX GALLERY
+   Click a portfolio image to view it full size. Closes via
+   the close button, an outside click, or the Escape key.
+   ============================================================ */
+(function initLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const closeBtn = document.getElementById('lightboxClose');
+  const items = document.querySelectorAll('.portfolio-item img');
+  if (!lightbox || !lightboxImage || !closeBtn || !items.length) return;
+
+  let lastFocused = null;
+
+  function openLightbox(src, alt) {
+    lastFocused = document.activeElement;
+    lightboxImage.src = src;
+    lightboxImage.alt = alt || '';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lightboxImage.src = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  items.forEach(function (img) {
+    img.addEventListener('click', function () {
+      openLightbox(img.getAttribute('src'), img.getAttribute('alt'));
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  // Click outside the image (on the dark backdrop) closes it
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  // Escape key closes it
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+      closeLightbox();
     }
   });
 })();
